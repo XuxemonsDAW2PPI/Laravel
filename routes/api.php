@@ -20,6 +20,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
+//Usuarios
+
+
+//Xuxemons
 Route::get('/', [PostXuxe::class, 'index'])->name('index');
 Route::get('/show/{id}', [PostXuxe::class, 'show'])->name('show');
 Route::post('/store', [PostXuxe::class, 'store'])->name('store');
