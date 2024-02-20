@@ -14,4 +14,6 @@ class Xuxemon extends Model
         'Tipo',
         'Imagen'
     ];
+    const UPDATED_AT = null;
+    const CREATED_AT = null;
 }

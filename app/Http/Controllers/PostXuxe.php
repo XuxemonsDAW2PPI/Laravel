@@ -28,7 +28,7 @@ class PostXuxe extends Controller
         $xuxemon->id = $request->input('id');
         $xuxemon->Nombre = $request->input('Nombre');
         $xuxemon->Tipo = $request->input('Tipo');
-        $xuxemon->Imagen = $request->input('Tamano');
+        $xuxemon->Imagen = $request->input('Imagen');
         $xuxemon->save();
         return response()->json('Xuxemon creado correctamente');
     }
@@ -42,7 +42,7 @@ class PostXuxe extends Controller
         $xuxemon->id = $request->input('id');
         $xuxemon->Nombre = $request->input('Nombre');
         $xuxemon->Tipo = $request->input('Tipo');
-        $xuxemon->Imagen = $request->input('Tamano');
+        $xuxemon->Imagen = $request->input('Imagen');
         $xuxemon->save();
         return response()->json('Xuxemon actualizado correctamente');
     }

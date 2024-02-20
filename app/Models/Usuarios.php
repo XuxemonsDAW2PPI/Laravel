@@ -15,4 +15,7 @@ class Usuarios extends Model
         'Correo',
         'UserType',
     ];
+    const UPDATED_AT = null;
+    const CREATED_AT = null;
+
 }
