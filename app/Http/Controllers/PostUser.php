@@ -7,6 +7,11 @@ use App\Models\Usuarios;
 
 class PostUser extends Controller
 {
+    public function login()
+    {
+        
+    }
+
     public function index()
     {
         $Usuarios = Usuarios::all();

@@ -14,18 +14,18 @@ class Userware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function login(Request $request, Closure $next): Response
     {
-        $Usuarioss = Usuarioss::find($request->input('Usuarios'));
-        if ($Usuarioss == null) {
-            return redirect()->route('tasks.auth')->with('error', 'No se ha encontrado ningun Usuarios');
+        $Usuarios = Usuarios::find($request->input('Usuarios'));
+        if ($Usuarios == null) {
+            //return redirect()->route('tasks.auth')->with('error', 'No se ha encontrado ningun Usuario');
         } else {
-            if($Usuarios->UserType == 'Usuarios') {
+            if($Usuarios->UserType == 'Usuario') {
                 session(['Usuarios' => $Usuarios]);
-                return redirect()->route('tasks.Usuarios');
+                //return redirect()->route('tasks.Usuarios');
             } else if ($Usuarios->UserType == 'Admin'){
                 session(['Usuarios' => $Usuarios]);
-                return redirect()->route('tasks.admin');
+                //return redirect()->route('tasks.admin');
             }
         }
     }
