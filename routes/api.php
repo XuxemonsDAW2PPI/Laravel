@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-//Usuarios
+//User
 Route::get('User/', [PostUser::class, 'index'])->name('index');
 Route::get('User/show/{id}', [PostUser::class, 'show'])->name('show');
 Route::post('User/store', [PostUser::class, 'store'])->name('store');

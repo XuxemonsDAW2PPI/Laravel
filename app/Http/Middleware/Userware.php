@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Models\Usuarioss;
+use App\Models\User;
 
 class Userware
 {
@@ -16,15 +16,15 @@ class Userware
      */
     public function login(Request $request, Closure $next): Response
     {
-        $Usuarios = Usuarios::find($request->input('Usuarios'));
-        if ($Usuarios == null) {
+        $User = User::find($request->input('User'));
+        if ($User == null) {
             //return redirect()->route('tasks.auth')->with('error', 'No se ha encontrado ningun Usuario');
         } else {
-            if($Usuarios->UserType == 'Usuario') {
-                session(['Usuarios' => $Usuarios]);
-                //return redirect()->route('tasks.Usuarios');
-            } else if ($Usuarios->UserType == 'Admin'){
-                session(['Usuarios' => $Usuarios]);
+            if($User->UserType == 'Usuario') {
+                session(['User' => $User]);
+                //return redirect()->route('tasks.User');
+            } else if ($User->UserType == 'Admin'){
+                session(['User' => $User]);
                 //return redirect()->route('tasks.admin');
             }
         }

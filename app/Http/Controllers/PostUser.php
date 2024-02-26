@@ -3,64 +3,59 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Usuarios;
+use App\Models\User;
 
 class PostUser extends Controller
 {
-    public function login()
-    {
-        
-    }
-
     public function index()
     {
-        $Usuarios = Usuarios::all();
-        return response()->json($Usuarios);
+        $User = User::all();
+        return response()->json($User);
     }
 
     public function show($id)
     {
-        $Usuarios = Usuarios::find($id);
-        if (!$Usuarios) {
+        $User = User::find($id);
+        if (!$User) {
             return response()->json('Usuario no encontrado');
         }
-        return response()->json($Usuarios);
+        return response()->json($User);
     }
 
     public function store(Request $request)
     {
-        $Usuarios = new Usuarios();
-        $Usuarios->id = $request->input('id');
-        $Usuarios->Nombre = $request->input('Nombre');
-        $Usuarios->Contraseña = $request->input('Contraseña');
-        $Usuarios->Correo = $request->input('Correo');
-        $Usuarios->UserType = $request->input('UserType');
-        $Usuarios->save();
+        $User = new User();
+        $User->id = $request->input('id');
+        $User->Nombre = $request->input('Nombre');
+        $User->Contraseña = $request->input('Contraseña');
+        $User->Correo = $request->input('Correo');
+        $User->UserType = $request->input('UserType');
+        $User->save();
         return response()->json('Usuario creado correctamente');
     }
 
     public function update(Request $request, $id)
     {
-        $Usuarios = Usuarios::find($id);
-        if (!$Usuarios) {
+        $User = User::find($id);
+        if (!$User) {
             return response()->json('Usuario no encontrado');
         }
-        $Usuarios->id = $request->input('id');
-        $Usuarios->Nombre = $request->input('Nombre');
-        $Usuarios->Contraseña = $request->input('Contraseña');
-        $Usuarios->Correo = $request->input('Correo');
-        $Usuarios->UserType = $request->input('UserType');
-        $Usuarios->save();
+        $User->id = $request->input('id');
+        $User->Nombre = $request->input('Nombre');
+        $User->Contraseña = $request->input('Contraseña');
+        $User->Correo = $request->input('Correo');
+        $User->UserType = $request->input('UserType');
+        $User->save();
         return response()->json('Usuario actualizado correctamente');
     }
 
     public function destroy($id)
     {
-        $Usuarios = Usuarios::find($id);
-        if (!$Usuarios) {
+        $User = User::find($id);
+        if (!$User) {
             return response()->json(['Usuario not found']);
         }
-        $Usuarios->delete();
+        $User->delete();
         return response()->json(['Usuario borrado']);
     }
 }
