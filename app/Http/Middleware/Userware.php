@@ -4,29 +4,37 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Response;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class Userware
 {
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
      */
-    public function login(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next)
     {
-        $User = User::find($request->input('User'));
-        if ($User == null) {
-            //return redirect()->route('tasks.auth')->with('error', 'No se ha encontrado ningun Usuario');
-        } else {
-            if($User->UserType == 'Usuario') {
-                session(['User' => $User]);
-                //return redirect()->route('tasks.User');
-            } else if ($User->UserType == 'Admin'){
-                session(['User' => $User]);
-                //return redirect()->route('tasks.admin');
-            }
+        $user = User::where('Nombre', $request->input('Nombre'))->first();
+
+        if ($user === null) {
+            return Response::json(['error' => 'No se ha encontrado ningún usuario'], 404);
         }
+
+        // Comprueba si la contraseña coincide
+        if ($request->input('Password') !== $user->Password) {
+            return Response::json(['error' => 'Contraseña incorrecta'], 403);
+        }
+
+        if ($user->UserType === 'Usuario' || $user->UserType === 'Admin') {
+            session(['User' => $user]);
+            return $next($request);
+        }
+
+        return Response::json(['error' => 'Tipo de usuario no válido'], 403);
     }
 }

@@ -7,6 +7,11 @@ use App\Models\User;
 
 class PostUser extends Controller
 {
+    public function login()
+    {
+        return response()->json("HOLA!");
+    }
+
     public function index()
     {
         $User = User::all();
@@ -27,8 +32,8 @@ class PostUser extends Controller
         $User = new User();
         $User->id = $request->input('id');
         $User->Nombre = $request->input('Nombre');
-        $User->Contraseña = $request->input('Contraseña');
-        $User->Correo = $request->input('Correo');
+        $User->Password = $request->input('Password');
+        $User->Email = $request->input('Email');
         $User->UserType = $request->input('UserType');
         $User->save();
         return response()->json('Usuario creado correctamente');
@@ -42,8 +47,8 @@ class PostUser extends Controller
         }
         $User->id = $request->input('id');
         $User->Nombre = $request->input('Nombre');
-        $User->Contraseña = $request->input('Contraseña');
-        $User->Correo = $request->input('Correo');
+        $User->Password = $request->input('Password');
+        $User->Email = $request->input('Email');
         $User->UserType = $request->input('UserType');
         $User->save();
         return response()->json('Usuario actualizado correctamente');
