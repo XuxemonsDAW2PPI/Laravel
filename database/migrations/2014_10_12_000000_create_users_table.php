@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('Email')->unique();
             $table->string('Password');
             $table->string('UserType');
+            $table->timestamps();
         });
     }
 
@@ -27,7 +28,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('users');
     }
-
-    const UPDATED_AT = null;
-    const CREATED_AT = null;
 };

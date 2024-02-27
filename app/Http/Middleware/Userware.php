@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Hash; // Importar la clase Hash
 
 class Userware
 {
@@ -25,8 +25,8 @@ class Userware
             return Response::json(['error' => 'No se ha encontrado ningún usuario'], 404);
         }
 
-        // Comprueba si la contraseña coincide
-        if ($request->input('Password') !== $user->Password) {
+        // Comprueba si la contraseña coincide usando la función de hash
+        if (!Hash::check($request->input('Password'), $user->Password)) {
             return Response::json(['error' => 'Contraseña incorrecta'], 403);
         }
 
