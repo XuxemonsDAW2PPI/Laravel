@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostXuxe;
 use App\Http\Controllers\PostUser;
+use App\Http\Controllers\PostInvXuxe;
 
 
 /*
@@ -38,3 +39,10 @@ Route::get('Xuxemon/show/{id}', [PostXuxe::class, 'show'])->name('xshow');
 Route::post('Xuxemon/store', [PostXuxe::class, 'store'])->name('xstore');
 Route::post('Xuxemon/update/{id}', [PostXuxe::class, 'update'])->name('xupdate');
 Route::delete('Xuxemon/delete/{id}', [PostXuxe::class, 'destroy'])->name('xdestroy');
+
+
+//Inventario Xuxemons
+
+
+
+//Inventario Items

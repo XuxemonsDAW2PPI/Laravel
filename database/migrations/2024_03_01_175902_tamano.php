@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Xuxemons', function (Blueprint $table) {
+        Schema::create('Ajustes', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->string('tipo');
-            $table->string('tamaño')->default('Pequeño');
-            $table->string('imagen');
+            $table->string('default')->default('Pequeño');
+            $table->integer('sm_med');
+            $table->integer('med_big');
         });
     }
+    
 
     /**
      * Reverse the migrations.
