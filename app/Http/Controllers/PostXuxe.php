@@ -78,6 +78,7 @@ class PostXuxe extends Controller
         $xuxemon->Tipo = $request->input('Tipo');
         $xuxemon->Imagen = $request->input('Imagen');
         $xuxemon->save();
+        return response()->json('Xuxemon');
         return response()->json('Xuxemon actualizado correctamente');
     }
 
