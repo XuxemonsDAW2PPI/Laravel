@@ -24,16 +24,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 //User
-Route::post('User/login', [PostUser::class, 'login'])->name('login')->middleware('Userware');
-Route::get('User/', [PostUser::class, 'index'])->name('index');
-Route::get('User/show/{id}', [PostUser::class, 'show'])->name('show');
-Route::post('User/store', [PostUser::class, 'store'])->name('store');
-Route::post('User/update/{id}', [PostUser::class, 'update'])->name('update');
-Route::delete('User/delete/{id}', [PostUser::class, 'destroy'])->name('destroy');
+Route::post('User/login', [PostUser::class, 'login'])->name('ulogin')->middleware('Userware');
+Route::get('User/', [PostUser::class, 'index'])->name('uindex');
+Route::get('User/show/{id}', [PostUser::class, 'show'])->name('ushow');
+Route::post('User/store', [PostUser::class, 'store'])->name('ustore');
+Route::post('User/update/{id}', [PostUser::class, 'update'])->name('uupdate');
+Route::delete('User/delete/{id}', [PostUser::class, 'destroy'])->name('udestroy');
 
 //Xuxemons
-Route::get('Xuxemon/', [PostXuxe::class, 'index'])->name('index');
-Route::get('Xuxemon/show/{id}', [PostXuxe::class, 'show'])->name('show');
-Route::post('Xuxemon/store', [PostXuxe::class, 'store'])->name('store');
-Route::post('Xuxemon/update/{id}', [PostXuxe::class, 'update'])->name('update');
-Route::delete('Xuxemon/delete/{id}', [PostXuxe::class, 'destroy'])->name('destroy');
+Route::get('Xuxemon/load', [PostXuxe::class, 'cargarXuxemon'])->name('xload');
+Route::get('Xuxemon/', [PostXuxe::class, 'index'])->name('xindex');
+Route::get('Xuxemon/show/{id}', [PostXuxe::class, 'show'])->name('xshow');
+Route::post('Xuxemon/store', [PostXuxe::class, 'store'])->name('xstore');
+Route::post('Xuxemon/update/{id}', [PostXuxe::class, 'update'])->name('xupdate');
+Route::delete('Xuxemon/delete/{id}', [PostXuxe::class, 'destroy'])->name('xdestroy');

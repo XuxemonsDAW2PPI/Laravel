@@ -7,6 +7,40 @@ use App\Models\Xuxemon;
 
 class PostXuxe extends Controller
 {
+
+    public function cargarXuxemon()
+    {
+        $jsonFilePath = './../database/data/data.json';
+
+        // Verificar si el archivo existe y es accesible
+        if (!file_exists($jsonFilePath) || !is_readable($jsonFilePath)) {
+            die("El archivo JSON no existe o no se puede leer.");
+        }
+        
+        // Leer el contenido del archivo JSON
+        $json = file_get_contents($jsonFilePath);
+        
+        // Decodificar el JSON a un array asociativo
+        $data = json_decode($json, true);
+        
+        // Verificar si la decodificación fue exitosa
+        if ($data === null && json_last_error() !== JSON_ERROR_NONE) {
+            die("Error al decodificar el archivo JSON: " . json_last_error_msg());
+        }
+
+        $data = json_decode($json, true);
+
+
+        foreach($data as $row) {
+            $xuxemon = new Xuxemon();
+            $xuxemon->id = $row['id'];
+            $xuxemon->Nombre = $row['Nombre'];
+            $xuxemon->Tipo = $row['Tipo'];
+            $xuxemon->Imagen = $row['Imagen'];
+            $xuxemon->save();
+        }
+    }
+
     public function index()
     {
         $xuxemon = Xuxemon::all();
