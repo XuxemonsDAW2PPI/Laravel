@@ -31,10 +31,10 @@ class PostUser extends Controller
     {
         $User = new User();
         $User->id = $request->input('id');
-        $User->nombre = $request->input('Nombre');
-        $User->password = $request->input('Password');
-        $User->email = $request->input('Email');
-        $User->userType = $request->input('UserType');
+        $User->nombre = $request->input('nombre');
+        $User->password = $request->input('password');
+        $User->email = $request->input('email');
+        $User->userType = $request->input('usertype');
         $User->save();
         return response()->json('Usuario creado correctamente');
     }
@@ -46,10 +46,10 @@ class PostUser extends Controller
             return response()->json('Usuario no encontrado');
         }
         $User->id = $request->input('id');
-        $User->nombre = $request->input('Nombre');
-        $User->password = $request->input('Password');
-        $User->email = $request->input('Email');
-        $User->userType = $request->input('UserType');
+        $User->nombre = $request->input('nombre');
+        $User->password = $request->input('password');
+        $User->email = $request->input('email');
+        $User->userType = $request->input('usertype');
         $User->save();
         return response()->json('Usuario actualizado correctamente');
     }

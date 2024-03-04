@@ -19,18 +19,18 @@ class Userware
      */
     public function handle(Request $request, Closure $next)
     {
-        $user = User::where('Nombre', $request->input('Nombre'))->first();
+        $user = User::where('nombre', $request->input('nombre'))->first();
 
         if ($user === null) {
             return Response::json(['error' => 'No se ha encontrado ningún usuario'], 404);
         }
 
         // Comprueba si la contraseña coincide usando la función de hash
-        if (!Hash::check($request->input('Password'), $user->Password)) {
+        if (!Hash::check($request->input('password'), $user->password)) {
             return Response::json(['error' => 'Contraseña incorrecta'], 403);
         }
 
-        if ($user->UserType === 'Usuario' || $user->UserType === 'Admin') {
+        if ($user->usertype === 'Usuario' || $user->usertype === 'Admin') {
             session(['User' => $user]);
             return $next($request);
         }

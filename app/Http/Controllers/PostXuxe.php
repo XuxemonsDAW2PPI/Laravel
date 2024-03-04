@@ -34,10 +34,9 @@ class PostXuxe extends Controller
         foreach($data as $row) {
             $xuxemon = new Xuxemon();
             $xuxemon->id = $row['id'];
-            $xuxemon->nombre = $row['Nombre'];
-            $xuxemon->tipo = $row['Tipo'];
-            $xuxemon->tamaño = $row['Tamaño'];
-            $xuxemon->imagen = $row['Imagen'];
+            $xuxemon->nombre = $row['nombre'];
+            $xuxemon->tipo = $row['tipo'];
+            $xuxemon->imagen = $row['imagen'];
             $xuxemon->save();
         }
     }
@@ -61,10 +60,9 @@ class PostXuxe extends Controller
     {
         $xuxemon = new Xuxemon();
         $xuxemon->id = $request->input('id');
-        $xuxemon->nombre = $request->input('Nombre');
-        $xuxemon->tipo = $request->input('Tipo');
-        $xuxemon->tamaño = $request->input('Tamaño');
-        $xuxemon->imagen = $request->input('Imagen');
+        $xuxemon->nombre = $request->input('nombre');
+        $xuxemon->tipo = $request->input('tipo');
+        $xuxemon->imagen = $request->input('imagen');
         $xuxemon->save();
         return response()->json('Xuxemon creado correctamente');
     }
@@ -76,10 +74,9 @@ class PostXuxe extends Controller
             return response()->json('Xuxemon no encontrado');
         }
         $xuxemon->id = $request->input('id');
-        $xuxemon->nombre = $request->input('Nombre');
-        $xuxemon->tipo = $request->input('Tipo');
-        $xuxemon->tamaño = $request->input('Tamaño');
-        $xuxemon->imagen = $request->input('Imagen');
+        $xuxemon->nombre = $request->input('nombre');
+        $xuxemon->tipo = $request->input('tipo');
+        $xuxemon->imagen = $request->input('imagen');
         $xuxemon->save();
         return response()->json('Xuxemon');
         return response()->json('Xuxemon actualizado correctamente');

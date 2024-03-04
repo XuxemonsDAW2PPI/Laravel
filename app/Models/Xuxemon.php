@@ -10,9 +10,9 @@ class Xuxemon extends Model
     use HasFactory;
     protected $fillable = [
         'id',
-        'Nombre',
-        'Tipo',
-        'Imagen'
+        'nombre',
+        'tipo',
+        'imagen'
     ];
     const UPDATED_AT = null;
     const CREATED_AT = null;
