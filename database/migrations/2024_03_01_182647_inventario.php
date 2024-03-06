@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('inventario', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('idUsuario'); // Clave foránea hacia la tabla 'users'
-            $table->unsignedBigInteger('idXuxemon'); // Clave foránea hacia la tabla 'xuxemons'
+            $table->unsignedBigInteger('idItem'); // Clave foránea hacia la tabla 'xuxemons'
+            $table->integer('cps');
             
             // Definir las restricciones de clave foránea
             $table->foreign('idUsuario')->references('id')->on('users');
-            $table->foreign('idXuxemon')->references('id')->on('xuxemons');
         });
         
     }

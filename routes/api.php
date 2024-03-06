@@ -42,7 +42,7 @@ Route::delete('Xuxemon/delete/{id}', [PostXuxe::class, 'destroy'])->name('xdestr
 
 
 //Inventario Xuxemons
-Route::post('Xuxemon/give', [PostInvXuxe::class, 'give'])->name('igive');
-
+Route::post('Xuxemon/give', [PostInvXuxe::class, 'give'])->name('xgive');
+Route::get('Xuxemon/mostrarinv/{id}', [PostInvXuxe::class, 'mostrarInv'])->name('mostrarinv');
 
 //Inventario Items

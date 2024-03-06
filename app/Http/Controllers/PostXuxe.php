@@ -35,6 +35,7 @@ class PostXuxe extends Controller
             $xuxemon = new Xuxemon();
             $xuxemon->id = $row['id'];
             $xuxemon->nombre = $row['nombre'];
+            $xuxemon->tamano = $row['tamano'];
             $xuxemon->tipo = $row['tipo'];
             $xuxemon->imagen = $row['imagen'];
             $xuxemon->save();
