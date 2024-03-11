@@ -30,7 +30,6 @@ class PostXuxe extends Controller
 
         $data = json_decode($json, true);
 
-
         foreach($data as $row) {
             $xuxemon = new Xuxemon();
             $xuxemon->id = $row['id'];
@@ -40,6 +39,8 @@ class PostXuxe extends Controller
             $xuxemon->imagen = $row['imagen'];
             $xuxemon->save();
         }
+
+    
     }
 
     public function index()

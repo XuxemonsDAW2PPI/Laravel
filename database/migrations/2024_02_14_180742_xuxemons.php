@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('tipo');
-            $table->string('tamaño')->default('Pequeño');
+            $table->string('tamano')->default('Pequeño');
             $table->string('imagen');
         });
     }
