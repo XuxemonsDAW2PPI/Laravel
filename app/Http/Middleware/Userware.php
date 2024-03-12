@@ -32,7 +32,7 @@ class Userware
 
         if ($user->usertype === 'Usuario' || $user->usertype === 'Admin') {
             session(['User' => $user]);
-            return $next($request);
+            return $next($request)->header('User-Type', $user->usertype); // Incluye el tipo de usuario en la cabecera de la respuesta
         }
 
         return Response::json(['error' => 'Tipo de usuario no válido'], 403);
