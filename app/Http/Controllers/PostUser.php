@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\inventario;
 
 class PostUser extends Controller
 {
@@ -36,6 +37,10 @@ class PostUser extends Controller
         $User->email = $request->input('email');
         $User->userType = $request->input('usertype');
         $User->save();
+
+        $inventario = new inventario();
+        $inventario->idusuario = $User->id;
+        $inventario->save();
         return response()->json('Usuario creado correctamente');
     }
 

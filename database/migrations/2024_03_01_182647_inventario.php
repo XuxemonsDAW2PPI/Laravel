@@ -11,16 +11,28 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('inventario', function (Blueprint $table) {
+        Schema::create('inventarios', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('idUsuario'); // Clave foránea hacia la tabla 'users'
-            $table->unsignedBigInteger('idItem'); // Clave foránea hacia la tabla 'xuxemons'
-            $table->integer('cps');
+            $table->unsignedBigInteger('idusuario')->default(0); // Clave foránea hacia la tabla 'users'
+            $table->unsignedBigInteger('monedas')->default(0); // Clave foránea hacia la tabla 'xuxemons'
+            $table->unsignedBigInteger('caramelos')->default(0); 
+            $table->unsignedBigInteger('piruleta')->default(0); 
+            $table->unsignedBigInteger('piruletal')->default(0); 
+            $table->unsignedBigInteger('algodon')->default(0); 
+            $table->unsignedBigInteger('tabletachoco')->default(0); 
+            $table->unsignedBigInteger('caramelo')->default(0); 
+            $table->unsignedBigInteger('baston')->default(0);
+            $table->unsignedBigInteger('caramelolargo')->default(0);
+            $table->unsignedBigInteger('carameloredondo')->default(0);
+            $table->unsignedBigInteger('surtido')->default(0);
             
-            // Definir las restricciones de clave foránea
-            $table->foreign('idUsuario')->references('id')->on('users');
         });
-        
+        Schema::table('inventarios', function (Blueprint $table) {
+            $table->foreign('idusuario')
+                  ->references('id')
+                  ->on('users')
+                  ->onDelete('cascade');
+        });
     }
 
     /**
