@@ -39,6 +39,8 @@ Route::get('Xuxemon/show/{id}', [PostXuxe::class, 'show'])->name('xshow');
 Route::post('Xuxemon/store', [PostXuxe::class, 'store'])->name('xstore');
 Route::post('Xuxemon/update/{id}', [PostXuxe::class, 'update'])->name('xupdate');
 Route::delete('Xuxemon/delete/{id}', [PostXuxe::class, 'destroy'])->name('xdestroy');
+Route::post('Xuxemon/actualizar-tamano', [PostXuxe::class, 'actualizartamano'])->name('xactualizartamano');
+
 
 
 //Inventario Xuxemons

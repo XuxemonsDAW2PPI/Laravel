@@ -8,40 +8,40 @@ use App\Models\Xuxemon;
 class PostXuxe extends Controller
 {
 
-    public function cargarXuxemon()
-    {
-        $jsonFilePath = './../database/data/data.json';
+    public function cargarXuxemon(Request $request)
+{
+    $request->validate([
+        'tamanoPorDefecto' => 'required|string|in:Pequeño,Mediano,Grande', // Validar el tamaño por defecto seleccionado por el administrador
+    ]);
 
-        // Verificar si el archivo existe y es accesible
-        if (!file_exists($jsonFilePath) || !is_readable($jsonFilePath)) {
-            die("El archivo JSON no existe o no se puede leer.");
-        }
-        
-        // Leer el contenido del archivo JSON
-        $json = file_get_contents($jsonFilePath);
-        
-        // Decodificar el JSON a un array asociativo
-        $data = json_decode($json, true);
-        
-        // Verificar si la decodificación fue exitosa
-        if ($data === null && json_last_error() !== JSON_ERROR_NONE) {
-            die("Error al decodificar el archivo JSON: " . json_last_error_msg());
-        }
+    $tamanoPorDefecto = $request->input('tamanoPorDefecto');
 
-        $data = json_decode($json, true);
+    $jsonFilePath = './../database/data/data.json';
 
-        foreach($data as $row) {
-            $xuxemon = new Xuxemon();
-            $xuxemon->id = $row['id'];
-            $xuxemon->nombre = $row['nombre'];
-            $xuxemon->tamano = $row['tamano'];
-            $xuxemon->tipo = $row['tipo'];
-            $xuxemon->imagen = $row['imagen'];
-            $xuxemon->save();
-        }
-
-    
+    if (!file_exists($jsonFilePath) || !is_readable($jsonFilePath)) {
+        return response()->json(['message' => 'El archivo JSON no existe o no se puede leer.'], 500);
     }
+
+    $json = file_get_contents($jsonFilePath);
+
+    $data = json_decode($json, true);
+
+    if ($data === null && json_last_error() !== JSON_ERROR_NONE) {
+        return response()->json(['message' => 'Error al decodificar el archivo JSON: ' . json_last_error_msg()], 500);
+    }
+
+    foreach($data as $row) {
+        $xuxemon = new Xuxemon();
+        $xuxemon->id = $row['id'];
+        $xuxemon->nombre = $row['nombre'];
+        $xuxemon->tipo = $row['tipo'];
+        $xuxemon->imagen = $row['imagen'];
+        $xuxemon->tamano = $tamanoPorDefecto; // Establecer el tamaño por defecto seleccionado por el administrador
+        $xuxemon->save();
+    }
+
+    return response()->json(['message' => 'Xuxemons cargados correctamente con el tamaño por defecto'], 200);
+}
 
     public function index()
     {
@@ -93,4 +93,25 @@ class PostXuxe extends Controller
         $xuxemon->delete();
         return response()->json(['Xuxemon borrado']);
     }
+
+    public function actualizarTamano(Request $request)
+{
+    $request->validate([
+        'nuevoTamano' => 'required|string|in:Pequeño,Mediano,Grande', // Ajusta las validaciones según tus necesidades
+    ]);
+
+    $nuevoTamano = $request->input('nuevoTamano');
+
+    $xuxemons = Xuxemon::all();
+
+    foreach ($xuxemons as $xuxemon) {
+        $xuxemon->tamano = $nuevoTamano;
+        $xuxemon->save();
+    }
+
+    return response()->json(['message' => 'Tamaño por defecto de los xuxemons modificados correctamente'], 200);
+}
+
+
+
 }
