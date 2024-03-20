@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostXuxe;
 use App\Http\Controllers\PostUser;
 use App\Http\Controllers\PostInvXuxe;
+use App\Http\Controllers\PostInventario;
+use App\Http\Controllers\AuthController;
 
 
 /*
@@ -25,7 +27,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 //User
-Route::post('User/login', [PostUser::class, 'login'])->name('ulogin')->middleware('Userware');
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
+});
 Route::get('User/', [PostUser::class, 'index'])->name('uindex');
 Route::get('User/show/{id}', [PostUser::class, 'show'])->name('ushow');
 Route::post('User/store', [PostUser::class, 'store'])->name('ustore');
@@ -43,6 +49,7 @@ Route::delete('Xuxemon/delete/{id}', [PostXuxe::class, 'destroy'])->name('xdestr
 
 //Inventario Xuxemons
 Route::post('Xuxemon/give', [PostInvXuxe::class, 'give'])->name('xgive');
-Route::get('Xuxemon/mostrarinv/{id}', [PostInvXuxe::class, 'mostrarInv'])->name('mostrarinv');
+Route::get('Xuxemon/mostrar/{id}', [PostInvXuxe::class, 'mostrar'])->name('mostrar');
 
 //Inventario Items
+Route::get('Inventario/mostrarinv', [PostInventario::class, 'show'])->name('mostrarinv');

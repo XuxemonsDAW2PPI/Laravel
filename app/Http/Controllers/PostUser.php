@@ -8,10 +8,6 @@ use App\Models\inventario;
 
 class PostUser extends Controller
 {
-    public function login()
-    {
-        return response()->json("HOLA!");
-    }
 
     public function index()
     {
