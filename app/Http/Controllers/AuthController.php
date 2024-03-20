@@ -11,12 +11,17 @@ class AuthController extends Controller
 {
     public function login(Request $request)
     {
+        $request->validate([
+            'nombre' => 'required|string',
+            'password' => 'required|string',
+        ]);
+
         $credentials = $request->only('nombre', 'password');
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-            Session::put('User', $user);
-            return response()->json(['user' => $user], 200);
+            $token = $user->createToken('AppName')->plainTextToken;
+            return response()->json(['user' => $user, 'token' => $token], 200);
         }
 
         return response()->json(['error' => 'Credenciales inválidas'], 401);
@@ -24,8 +29,9 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
+        $request->user()->tokens()->delete();
         Auth::logout();
-        Session::remove('User');
         return response()->json(['message' => 'Logout exitoso'], 200);
     }
+
 }
