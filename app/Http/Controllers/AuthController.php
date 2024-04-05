@@ -10,22 +10,23 @@ use App\Models\User;
 class AuthController extends Controller
 {
     public function login(Request $request)
-    {
-        $request->validate([
-            'nombre' => 'required|string',
-            'password' => 'required|string',
-        ]);
+{
+    $request->validate([
+        'nombre' => 'required|string',
+        'password' => 'required|string',
+    ]);
 
-        $credentials = $request->only('nombre', 'password');
+    $credentials = $request->only('nombre', 'password');
 
-        if (Auth::attempt($credentials)) {
-            $user = Auth::user();
-            $token = $user->createToken('AppName')->plainTextToken;
-            return response()->json(['user' => $user, 'token' => $token], 200);
-        }
-
-        return response()->json(['error' => 'Credenciales inválidas'], 401);
+    if (Auth::attempt($credentials)) {
+        $user = Auth::user();
+        $token = $user->createToken('AppName')->plainTextToken;
+        return response()->json(['user' => $user, 'token' => $token, 'usertype' => $user->usertype], 200);
     }
+
+    return response()->json(['error' => 'Credenciales inválidas'], 401);
+}
+
 
     public function logout(Request $request)
     {
