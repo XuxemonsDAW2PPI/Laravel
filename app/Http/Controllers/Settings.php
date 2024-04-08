@@ -12,7 +12,7 @@ class Settings extends Controller
         if (!$Ajuste) {
             return response()->json('Usuario no encontrado');
         }
-        $Ajuste->id = $request->input('id');
+        $Ajuste->id = 1;
         $Ajuste->default = $request->input('default');
         $Ajuste->sm_med = $request->input('sm_med');
         $Ajuste->med_big = $request->input('med_big');
