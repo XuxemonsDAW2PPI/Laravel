@@ -21,11 +21,17 @@ class AuthController extends Controller
     if (Auth::attempt($credentials)) {
         $user = Auth::user();
         $token = $user->createToken('AppName')->plainTextToken;
-        return response()->json(['user' => $user, 'token' => $token, 'usertype' => $user->usertype], 200);
+        return response()->json([
+            'id' => $user->id,
+            'user' => $user,
+            'token' => $token,
+            'usertype' => $user->usertype
+        ], 200);
     }
 
     return response()->json(['error' => 'Credenciales inválidas'], 401);
 }
+
 
 
     public function logout(Request $request)

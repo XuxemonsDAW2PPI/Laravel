@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('inventarios', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('idusuario')->default(0); // Clave foránea hacia la tabla 'users'
-            $table->unsignedBigInteger('monedas')->default(0); // Clave foránea hacia la tabla 'xuxemons'
+            $table->unsignedBigInteger('idusuario'); // Clave foránea hacia la tabla 'users'
+            $table->unsignedBigInteger('monedas')->default(0); 
             $table->unsignedBigInteger('caramelos')->default(0); 
             $table->unsignedBigInteger('piruleta')->default(0); 
             $table->unsignedBigInteger('piruletal')->default(0); 

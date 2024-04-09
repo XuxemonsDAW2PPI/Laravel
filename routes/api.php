@@ -54,4 +54,7 @@ Route::post('Xuxemon/give', [PostInvXuxe::class, 'give'])->name('xgive');
 Route::get('Xuxemon/mostrar/{id}', [PostInvXuxe::class, 'mostrar'])->name('mostrar');
 
 //Inventario Items
-Route::get('Inventario/mostrarinv', [PostInventario::class, 'show'])->name('mostrarinv');
+Route::get('Inventario/{userId}', [PostInventario::class, 'show'])->name('mostrarinv');
+
+
+//Route::post('Inventario/{userId}/update', [PostInventario::class, 'updateInventario'])->name('updateobjeto');
