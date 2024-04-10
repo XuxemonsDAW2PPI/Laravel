@@ -46,7 +46,25 @@ public function aumentarCantidadAleatoria($userId)
         return response()->json('Cantidad de ' . $columnaAleatoria . ' aumentada en 2 unidades');
     }
 
+   /* public function restarCantidadObjeto($userId, $itemName)
+{
+    $inventario = Inventario::where('idusuario', $userId)->first();
 
+    if (!$inventario) {
+        return response()->json('Inventario no encontrado para este usuario', 404);
+    }
+
+    if (!$inventario->{$itemName}) {
+        return response()->json('El objeto no existe en el inventario', 404);
+    }
+
+    // Restar 1 a la cantidad del objeto
+    $inventario->{$itemName} -= 1;
+    $inventario->save();
+
+    return response()->json('Cantidad del objeto restada en 1 unidad');
+}*/
+    
 
 
 
