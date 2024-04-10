@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\inventario;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class PostInventario extends Controller
 {
@@ -24,40 +26,27 @@ class PostInventario extends Controller
     return response()->json($inventario);
 }
 
-//Falta la funcion de aumentar la cantidad de cualquier objeto del inventario.
+public function aumentarCantidadAleatoria($userId)
+    {
+        $inventario = inventario::where('idusuario', $userId)->first();
 
-/*public function updateInventario(Request $request, $userId)
-{
-    $request->validate([
-        'inventario' => 'required|array',
-    ]);
-
-    $inventario = $request->input('inventario');
-
-    foreach ($inventario as $item) {
-        $elemento = inventario::find($item['id']);
-
-        if (!$elemento) {
-            return response()->json('Elemento de inventario no encontrado', 404);
+        if (!$inventario) {
+            return response()->json('Inventario no encontrado para este usuario', 404);
         }
 
-        $elemento->monedas += 2;
-        $elemento->caramelos += 2;
-        $elemento->piruleta += 2;
-        $elemento->piruletal += 2;
-        $elemento->algodon += 2;
-        $elemento->tabletachoco += 2;
-        $elemento->caramelo += 2;
-        $elemento->baston += 2;
-        $elemento->caramelolargo += 2;
-        $elemento->carameloredondo += 2;
-        $elemento->surtido += 2;
+        $columnasInventario = Schema::getColumnListing('inventarios');
+        $columnasPermitidas = array_diff($columnasInventario, ['id', 'idusuario']);
 
-        $elemento->save();
+        $columnaAleatoria = collect($columnasPermitidas)->random();
+
+        $nuevoValor = $inventario->{$columnaAleatoria} + 2;
+
+        $inventario->update([$columnaAleatoria => $nuevoValor]);
+
+        return response()->json('Cantidad de ' . $columnaAleatoria . ' aumentada en 2 unidades');
     }
 
-    return response()->json('Inventario actualizado exitosamente');
-}*/
+
 
 
 

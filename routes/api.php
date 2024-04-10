@@ -55,6 +55,6 @@ Route::get('Xuxemon/mostrar/{id}', [PostInvXuxe::class, 'mostrar'])->name('mostr
 
 //Inventario Items
 Route::get('Inventario/{userId}', [PostInventario::class, 'show'])->name('mostrarinv');
-
+Route::post('Inventario/{userId}/aumentar', [PostInventario::class, 'aumentarCantidadAleatoria'])->name('aumentar_aleatorio');
 
 //Route::post('Inventario/{userId}/update', [PostInventario::class, 'updateInventario'])->name('updateobjeto');
