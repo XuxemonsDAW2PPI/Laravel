@@ -7,7 +7,7 @@ use Illuminate\Http\Models\Ajuste;
 
 class Settings extends Controller
 {
-    public function swtmñ($id){
+    public function swtmñ(Request $request, $id){
         $Ajuste = Ajuste::find($id);
         if (!$Ajuste) {
             return response()->json('Usuario no encontrado');
