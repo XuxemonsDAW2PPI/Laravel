@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Ajuste;
+use Illuminate\App\Models\Ajuste;
 
 class Settings extends Controller
 {
