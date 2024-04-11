@@ -7,8 +7,8 @@ use Illuminate\Http\Models\Ajuste;
 
 class Settings extends Controller
 {
-    public function sm_med(Request $request, $id){
-        $Ajuste = Ajuste::find($id);
+    public function sm_med(Request $request){
+        $Ajuste = Ajuste::find(1);
         if (!$Ajuste) {
             return response()->json('Usuario no encontrado');
         }
@@ -17,8 +17,8 @@ class Settings extends Controller
         $Ajuste->save();
         return response()->json('Ajustes actualizados correctamente');
     }
-    public function med_big(Request $request, $id){
-        $Ajuste = Ajuste::find($id);
+    public function med_big(Request $request){
+        $Ajuste = Ajuste::find(1);
         if (!$Ajuste) {
             return response()->json('Usuario no encontrado');
         }
