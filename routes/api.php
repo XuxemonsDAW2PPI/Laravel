@@ -7,7 +7,7 @@ use App\Http\Controllers\PostUser;
 use App\Http\Controllers\PostInvXuxe;
 use App\Http\Controllers\PostInventario;
 use App\Http\Controllers\AuthController;
-
+use App\Http\Controllers\Settings;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,3 +60,10 @@ Route::post('Inventario/{userId}/aumentar', [PostInventario::class, 'aumentarCan
 
 
 //Route::post('Inventario/{userId}/update', [PostInventario::class, 'updateInventario'])->name('updateobjeto');
+
+
+//RUTAS AJUSTES XUXES
+Route::post('/sm_med', [Settings::class, 'sm_med'])->name('sm_med_update');
+Route::post('/med_big', [Settings::class, 'med_big'])->name('med_big_update');
+
+
