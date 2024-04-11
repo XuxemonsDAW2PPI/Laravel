@@ -52,12 +52,11 @@ Route::post('Xuxemon/actualizar-tamano', [PostXuxe::class, 'actualizartamano'])-
 //Inventario Xuxemons
 Route::post('Xuxemon/give', [PostInvXuxe::class, 'give'])->name('xgive');
 Route::get('Xuxemon/mostrar/{id}', [PostInvXuxe::class, 'mostrar'])->name('mostrar');
-// Route::post('Xuxemon/{userId}/{itemName}/restar', [PostInventario::class, 'restarCantidadObjeto'])->name('restar_objeto');
 
 //Inventario Items
 Route::get('Inventario/{userId}', [PostInventario::class, 'show'])->name('mostrarinv');
 Route::post('Inventario/{userId}/aumentar', [PostInventario::class, 'aumentarCantidadAleatoria'])->name('aumentar_aleatorio');
-
+Route::post('Inventario/disminuir/{userId}/{objeto}', [PostInventario::class, 'disminuirCantidadObjeto'])->name('eliminarun_xuxe');
 
 //Route::post('Inventario/{userId}/update', [PostInventario::class, 'updateInventario'])->name('updateobjeto');
 
