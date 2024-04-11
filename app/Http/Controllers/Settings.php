@@ -7,18 +7,27 @@ use Illuminate\Http\Models\Ajuste;
 
 class Settings extends Controller
 {
-    public function swtmñ(Request $request, $id){
+    public function sm_med(Request $request, $id){
         $Ajuste = Ajuste::find($id);
         if (!$Ajuste) {
             return response()->json('Usuario no encontrado');
         }
         $Ajuste->id = 1;
-        $Ajuste->default = $request->input('default');
         $Ajuste->sm_med = $request->input('sm_med');
+        $Ajuste->save();
+        return response()->json('Ajustes actualizados correctamente');
+    }
+    public function med_big(Request $request, $id){
+        $Ajuste = Ajuste::find($id);
+        if (!$Ajuste) {
+            return response()->json('Usuario no encontrado');
+        }
+        $Ajuste->id = 1;
         $Ajuste->med_big = $request->input('med_big');
         $Ajuste->save();
         return response()->json('Ajustes actualizados correctamente');
     }
+
 
     
 }
