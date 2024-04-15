@@ -17,11 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('idusuario');
             $table->string('nombre');
             $table->string('tipo');
-            $table->string('tamano')->default('Pequeño');
+            $table->string('tamano');
             $table->string('imagen');
-            $table->boolean('Enfermedad1')->default(0);
-            $table->boolean('Enfermedad2')->default(0);
-            $table->boolean('Enfermedad3')->default(0);
 
             $table->foreign('idusuario')->references('id')->on('users');
             $table->foreign('idxuxemon')->references('id')->on('xuxemons');
