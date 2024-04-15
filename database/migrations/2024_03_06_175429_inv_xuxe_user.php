@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('idusuario');
             $table->string('nombre');
             $table->string('tipo');
-            $table->string('tamano');
+            $table->string('tamano')->default('Pequeño');
             $table->string('imagen');
             $table->string('estado');
 

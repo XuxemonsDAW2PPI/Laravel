@@ -14,8 +14,6 @@ class PostXuxe extends Controller
         'tamanoPorDefecto' => 'required|string|in:Pequeño,Mediano,Grande', // Validar el tamaño por defecto seleccionado por el administrador
     ]);
 
-    $tamanoPorDefecto = $request->input('tamanoPorDefecto');
-
     $jsonFilePath = './../database/data/data.json';
 
     if (!file_exists($jsonFilePath) || !is_readable($jsonFilePath)) {
