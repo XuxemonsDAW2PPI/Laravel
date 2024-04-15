@@ -83,7 +83,7 @@ public function aumentarCantidadAleatoria($userId)
             return response()->json('Usuario no encontrado', 404);
         }
     
-        $inventario = Inventario::firstOrCreate(['idusuario' => $userId]);
+        $inventario = inventario::firstOrCreate(['idusuario' => $userId]);
     
         // Verifica si la función ya se ejecutó hoy
         if ($user->ultima_ejecucion) {

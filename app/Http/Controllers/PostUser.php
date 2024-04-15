@@ -33,7 +33,13 @@ class PostUser extends Controller
         $user->email = $request->input('email');
         $user->userType = $request->input('usertype');
         $user->save();
+
+        $inventario = new inventario();
+        $inventario->idusuario = $user->id;
+        $inventario->save();
+
         return response()->json('Usuario creado correctamente');
+
     }
 
     public function update(Request $request, $id)
@@ -62,9 +68,7 @@ class PostUser extends Controller
     }
 
     public function asignar4Xuxe(){
-        $inventario = new inventario();
-        $inventario->idusuario = $user->id;
-        $inventario->save();
+
 
         // Obtener los datos de todos los xuxemons desde el archivo JSON
         $xuxemonsData = file_get_contents('./../database/data/data.json');
