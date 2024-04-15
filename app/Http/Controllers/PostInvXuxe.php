@@ -21,7 +21,7 @@ class PostInvXuxe extends Controller
         $xuxemoninv->save();
     }
 
-    public function mostrarInv()
+    public function mostrar($id)
     {
         $xuxemoninv = xuxemoninv::where('idusuario', $id)->get();
         if ($xuxemoninv->isEmpty()) {

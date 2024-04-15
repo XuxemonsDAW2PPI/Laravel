@@ -17,8 +17,9 @@ return new class extends Migration
             $table->unsignedBigInteger('idusuario');
             $table->string('nombre');
             $table->string('tipo');
-            $table->string('tamano')->default('Pequeño');
+            $table->string('tamano');
             $table->string('imagen');
+            $table->string('estado');
 
             $table->foreign('idusuario')->references('id')->on('users');
             $table->foreign('idxuxemon')->references('id')->on('xuxemons');
