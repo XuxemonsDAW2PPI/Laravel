@@ -51,7 +51,7 @@ Route::post('Xuxemon/actualizar-tamano', [PostXuxe::class, 'actualizartamano'])-
 
 //Inventario Xuxemons
 Route::post('Xuxemon/give', [PostInvXuxe::class, 'give'])->name('xgive');
-Route::get('Xuxemon/mostrar/{id}', [PostInvXuxe::class, 'mostrarInv'])->name('mostrar');
+Route::get('Xuxemon/mostrar/{id}', [PostInvXuxe::class, 'mostrar'])->name('mostrar');
 
 //Inventario Items
 Route::get('Inventario/{userId}', [PostInventario::class, 'show'])->name('mostrarinv');
