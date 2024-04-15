@@ -19,8 +19,6 @@ return new class extends Migration
             $table->string('tipo');
             $table->string('tamano');
             $table->string('imagen');
-            $table->string('estado');
-
 
             $table->foreign('idusuario')->references('id')->on('users');
             $table->foreign('idxuxemon')->references('id')->on('xuxemons');
