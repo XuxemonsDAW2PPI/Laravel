@@ -58,6 +58,7 @@ Route::get('Inventario/{userId}', [PostInventario::class, 'show'])->name('mostra
 Route::post('Inventario/{userId}/aumentar', [PostInventario::class, 'aumentarCantidadAleatoria'])->name('aumentar_aleatorio');
 Route::post('Inventario/disminuir/{userId}/{objeto}', [PostInventario::class, 'disminuirCantidadObjeto'])->name('eliminarun_xuxe');
 Route::post('Inventario/{userId}/aumentar-objetos-diarios', [PostInventario::class, 'aumentarObjetosDiarios'])->name('aumentardiario');
+Route::post('Inventario/{userId}/asignarxuxemons', [PostUser::class, 'asignar4Xuxe'])->name('asignarcuatro');
 
 //Route::post('Inventario/{userId}/update', [PostInventario::class, 'updateInventario'])->name('updateobjeto');
 
