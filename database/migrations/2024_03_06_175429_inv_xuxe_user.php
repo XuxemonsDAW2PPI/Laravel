@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('imagen');
             $table->string('estado');
 
-            $table->foreign('idusuario')->references('id')->on('users');
+            $table->foreign('idusuario')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('idxuxemon')->references('id')->on('xuxemons');
         });
     }
