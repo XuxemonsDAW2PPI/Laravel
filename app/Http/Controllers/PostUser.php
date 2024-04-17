@@ -94,6 +94,7 @@ class PostUser extends Controller
         $xuxemoninv->tamano = $tamanos[array_rand($tamanos)]; // Seleccionar aleatoriamente un tamaño
         $xuxemoninv->imagen = $xuxemon['imagen'];
         $xuxemoninv->estado = 'Activo';
+        $xuxemoninv->caramelos_comidos = $xuxemon['caramelos_comidos'];
         $xuxemoninv->save();
     }
 

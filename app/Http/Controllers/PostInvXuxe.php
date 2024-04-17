@@ -29,4 +29,22 @@ class PostInvXuxe extends Controller
         }
         return response()->json($xuxemoninv);
     }
+
+    public function alimentarXuxemon($idUser, $nombre)
+{    
+    $xuxemonInv = xuxemoninv::where('idusuario', $idUser)
+                    ->where('nombre', $nombre)
+                    ->first();
+
+    if (!$xuxemonInv) {
+        return response()->json(['error' => 'Xuxemon no encontrado'], 404);
+    }
+
+    // Incrementar caramelos_comidos
+    $xuxemonInv->caramelos_comidos += 1;
+    $xuxemonInv->save();
+
+    return response()->json(['success' => true]);
+}
+
 }

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('tamano')->default('Pequeño');
             $table->string('imagen');
             $table->string('estado');
+            $table->unsignedBigInteger('caramelos_comidos')->default(0);
 
             $table->foreign('idusuario')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('idxuxemon')->references('id')->on('xuxemons');

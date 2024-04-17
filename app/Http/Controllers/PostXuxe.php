@@ -35,6 +35,7 @@ class PostXuxe extends Controller
         $xuxemon->tipo = $row['tipo'];
         $xuxemon->imagen = $row['imagen'];
         $xuxemon->tamano = $request->input('tamanoPorDefecto'); // Establecer el tamaño por defecto seleccionado por el administrador
+        $xuxemon->caramelos_comidos = $row['caramelos_comidos'];
         $xuxemon->save();
     }
 

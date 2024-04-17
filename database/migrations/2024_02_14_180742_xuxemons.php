@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('tipo');
             $table->string('tamano')->default('Pequeño');
             $table->string('imagen');
+            $table->unsignedBigInteger('caramelos_comidos');
         });
     }
 

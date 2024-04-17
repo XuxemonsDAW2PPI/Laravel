@@ -12,7 +12,8 @@ class Xuxemon extends Model
         'id',
         'nombre',
         'tipo',
-        'imagen'
+        'imagen',
+        'caramelos_comidos'
     ];
     const UPDATED_AT = null;
     const CREATED_AT = null;
