@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('tipo');
             $table->string('tamano')->default('Pequeño');
             $table->string('imagen');
+            $table->boolean('Enfermedad1')->default(0);
+            $table->boolean('Enfermedad2')->default(0);;
+            $table->boolean('Enfermedad3')->default(0);;
             $table->string('estado');
             $table->unsignedBigInteger('caramelos_comidos')->default(0);
 

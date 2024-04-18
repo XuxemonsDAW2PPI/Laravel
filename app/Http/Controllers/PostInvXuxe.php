@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Xuxemon;
 use App\Models\xuxemoninv;
+use App\Models\Ajuste;
 
 class PostInvXuxe extends Controller
 {
@@ -31,20 +32,46 @@ class PostInvXuxe extends Controller
     }
 
     public function alimentarXuxemon($idUser, $nombre)
-{    
-    $xuxemonInv = xuxemoninv::where('idusuario', $idUser)
-                    ->where('nombre', $nombre)
-                    ->first();
+    {   
+        $min = 1;
+        $max = 100;
+        $Aj = Ajuste::where('id', 1)->first();
+        $nrando = rand($min, $max);
 
-    if (!$xuxemonInv) {
-        return response()->json(['error' => 'Xuxemon no encontrado'], 404);
+        $xuxemonInv = xuxemoninv::where('idusuario', $idUser)
+                        ->where('nombre', $nombre)
+                        ->first();
+
+        if (!$xuxemonInv) {
+            return response()->json(['error' => 'Xuxemon no encontrado'], 404);
+        }
+
+        if ($xuxemonInv->Enfermedad3 == true) {
+            return response()->json(['error' => 'Xuxemon tiene Atracón']);
+        }
+
+        if ($nrando <= $Aj->Enfermedad1) {
+            $xuxemonInv->Enfermedad1 = true;
+            $xuxemonInv->save();
+            return response()->json(['error' => 'Xuxemon se infectó con Bajón de Azúcar']);
+        }
+
+        if ($nrando <= $Aj->Enfermedad2) {
+            $xuxemonInv->Enfermedad2 = true;
+            $xuxemonInv->save();
+            return response()->json(['error' => 'Xuxemon se infectó con Sobredosis de Azúcar']);
+        }
+
+        if ($nrando <= $Aj->Enfermedad3) {
+            $xuxemonInv->Enfermedad3 = true;
+            $xuxemonInv->save();
+            return response()->json(['error' => 'Xuxemon se infectó con Atracón']);
+        }
+
+        // Incrementar caramelos_comidos
+        $xuxemonInv->caramelos_comidos += 1;
+        $xuxemonInv->save();
+        return response()->json(['success' => 'Numero aleatorio '.$nrando]);
     }
-
-    // Incrementar caramelos_comidos
-    $xuxemonInv->caramelos_comidos += 1;
-    $xuxemonInv->save();
-
-    return response()->json(['success' => true]);
-}
 
 }

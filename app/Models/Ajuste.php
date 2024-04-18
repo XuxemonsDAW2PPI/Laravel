@@ -12,7 +12,11 @@ class Ajuste extends Model
         'id',
         'default',
         'sm_med',
-        'med_big'
+        'med_big',
+        'Enfermedad1',
+        'Enfermedad2',
+        'Enfermedad3',
+        'Bajon'
     ];
     const UPDATED_AT = null;
     const CREATED_AT = null;

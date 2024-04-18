@@ -16,6 +16,10 @@ return new class extends Migration
             $table->string('default')->default('Pequeño');
             $table->integer('sm_med');
             $table->integer('med_big');
+            $table->integer('Enfermedad1');
+            $table->integer('Enfermedad2');
+            $table->integer('Enfermedad3');
+            $table->integer('Bajon');
         });
     }
     

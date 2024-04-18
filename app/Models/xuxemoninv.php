@@ -16,6 +16,9 @@ class xuxemoninv extends Model
         'tipo',
         'tamano',
         'imagen',
+        'Enfermedad1',
+        'Enfermedad2',
+        'Enfermedad3',
         'caramelos_comidos'
     ];
     const UPDATED_AT = null;
