@@ -8,6 +8,7 @@ use App\Http\Controllers\PostInvXuxe;
 use App\Http\Controllers\PostInventario;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Settings;
+use App\Http\Controllers\PostHospital;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,5 +70,12 @@ Route::get('Inventario/{userId}/xuxemoninfectado', [PostInvXuxe::class, 'Xuxemon
 //RUTAS AJUSTES XUXES
 Route::post('/sm_med', [Settings::class, 'sm_med'])->name('sm_med_update');
 Route::post('/med_big', [Settings::class, 'med_big'])->name('med_big_update');
+
+
+//Enfermedades
+Route::get('Inventario/{userId}/{nombre}/curarenfermedad1', [PostHospital::class, 'CurarEnf1'])->name('curarenfermedad1');
+Route::get('Inventario/{userId}/{nombre}/curarenfermedad2', [PostHospital::class, 'CurarEnf2'])->name('curarenfermedad2');
+Route::get('Inventario/{userId}/{nombre}/curarenfermedad3', [PostHospital::class, 'CurarEnf3'])->name('curarenfermedad3');
+
 
 

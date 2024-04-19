@@ -25,6 +25,8 @@ return new class extends Migration
             $table->unsignedBigInteger('caramelolargo')->default(0);
             $table->unsignedBigInteger('carameloredondo')->default(0);
             $table->unsignedBigInteger('surtido')->default(0);
+            $table->unsignedBigInteger('XalDeFrutas')->default(0);
+            $table->unsignedBigInteger('Inxulina')->default(0);
             
         });
         Schema::table('inventarios', function (Blueprint $table) {
