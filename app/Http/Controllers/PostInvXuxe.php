@@ -31,6 +31,22 @@ class PostInvXuxe extends Controller
         return response()->json($xuxemoninv);
     }
 
+    public function destroy($idusuario, $id)
+{
+    $xuxemoninv = xuxemoninv::where('idusuario', $idusuario)
+                             ->where('id', $id)
+                             ->first();
+
+    if (!$xuxemoninv) {
+        return response()->json(['error' => 'Xuxemon inválido'], 404);
+    }
+
+    $xuxemoninv->delete();
+
+    return response()->json(['success' => 'Xuxemon eliminado correctamente']);
+}
+    
+
     public function alimentarXuxemon($idUser, $nombre)
     {   
         $min = 1;
