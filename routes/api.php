@@ -71,6 +71,11 @@ Route::get('Inventario/{userId}/xuxemoninfectado', [PostInvXuxe::class, 'Xuxemon
 Route::post('/sm_med', [Settings::class, 'sm_med'])->name('sm_med_update');
 Route::post('/med_big', [Settings::class, 'med_big'])->name('med_big_update');
 
+// Rutas para el manejo de enfermedades
+Route::post('/enfermedad1', [Settings::class, 'Enfermedad1'])->name('enfermedad1_update');
+Route::post('/enfermedad2', [Settings::class, 'Enfermedad2'])->name('enfermedad2_update');
+Route::post('/enfermedad3', [Settings::class, 'Enfermedad3'])->name('enfermedad3_update');
+
 
 //Enfermedades
 Route::get('Inventario/{userId}/{nombre}/curarenfermedad1', [PostHospital::class, 'CurarEnf1'])->name('curarenfermedad1');
