@@ -69,6 +69,14 @@ class PostUser extends Controller
 
     public function asignar4Xuxe($userId)
 {
+    // Verificar si el usuario ya tiene xuxemons asignados
+    $userXuxemonsCount = xuxemoninv::where('idusuario', $userId)->count();
+    
+    // Si el usuario ya tiene xuxemons asignados, devolver un mensaje indicando que no se puede asignar más
+    if ($userXuxemonsCount > 0) {
+        return response()->json('Este usuario ya tiene xuxemons asignados', 403);
+    }
+
     // Obtener los datos de todos los xuxemons desde el archivo JSON
     $xuxemonsData = file_get_contents('./../database/data/data.json');
     $allXuxemons = json_decode($xuxemonsData, true);
@@ -98,6 +106,7 @@ class PostUser extends Controller
         $xuxemoninv->save();
     }
 
-    return response()->json('Se han asignado 4 Xuxemons al usuario.');
+    return response()->json('Xuxemons asignados correctamente');
 }
+
 }
