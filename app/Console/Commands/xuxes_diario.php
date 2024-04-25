@@ -29,7 +29,7 @@ class xuxes_diario extends Command
      */
     public function handle()
     {
-        $user = User::find($userId);
+        $user = User::all();
     
         if (!$user) {
             return response()->json('Usuario no encontrado', 404);
