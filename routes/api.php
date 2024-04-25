@@ -65,6 +65,8 @@ Route::post('Inventario/disminuir/{userId}/{objeto}', [PostInventario::class, 'd
 Route::post('Inventario/{userId}/aumentar-objetos-diarios', [PostInventario::class, 'aumentarObjetosDiarios'])->name('aumentardiario');
 Route::post('Inventario/{userId}/asignarxuxemons', [PostUser::class, 'asignar4Xuxe'])->name('asignarcuatro');
 Route::get('Inventario/{userId}/xuxemoninfectado', [PostInvXuxe::class, 'XuxemonInfectado'])->name('xuxemoninfectado');
+Route::get('InventarioT/testdiario', [PostInventario::class, 'testdiario'])->name('testdiario');
+
 
 //Route::post('Inventario/{userId}/update', [PostInventario::class, 'updateInventario'])->name('updateobjeto');
 
