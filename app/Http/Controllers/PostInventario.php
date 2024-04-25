@@ -14,7 +14,7 @@ use Illuminate\Http\JsonResponse;
 class PostInventario extends Controller
 {
     public function show($userId)
-{
+    {
     if ($userId === null) {
         return response()->json('ID de usuario no proporcionada', 400);
     }
@@ -26,9 +26,9 @@ class PostInventario extends Controller
     }
 
     return response()->json($inventario);
-}
+    }
 
-public function aumentarCantidadAleatoria($userId)
+    public function aumentarCantidadAleatoria($userId)
     {
         $inventario = inventario::where('idusuario', $userId)->first();
 
@@ -111,6 +111,39 @@ public function aumentarCantidadAleatoria($userId)
         $user->save();
     
         return response()->json('Se han aumentado 10 objetos aleatorios al inventario del usuario.');
+    }
+    public function testdiario()
+    {
+        // Obtener todos los inventarios
+        $inventarios = Inventario::all();
+
+        if ($inventarios->isEmpty()) {
+            return response()->json('Inventarios no encontrados', 404);
+        }
+
+        foreach ($inventarios as $inventario) {
+            // Obtener las columnas permitidas para la selección aleatoria
+            $columnasInventario = Schema::getColumnListing('inventarios');
+            
+            // Excluir los campos que no deseas modificar (id e idusuario)
+            $columnasPermitidas = array_diff($columnasInventario, ['id', 'idusuario']);
+
+            // Aumenta la cantidad de objetos aleatorios en el inventario
+            for ($i = 0; $i < 10; $i++) {
+                // Seleccionar una columna aleatoria de las permitidas
+                $columnaAleatoria = collect($columnasPermitidas)->random();
+                // Aumentar el valor de la columna seleccionada
+                $nuevoValor = $inventario->{$columnaAleatoria} + 1;
+                // Asignar el nuevo valor a la columna seleccionada
+                $inventario->{$columnaAleatoria} = $nuevoValor;
+            }
+
+            // Guardar los cambios en el inventario
+            $inventario->save();
+        }
+
+        return response()->json('Se han aumentado 10 objetos aleatorios en todos los inventarios.');
+
     }
 }
 
