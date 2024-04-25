@@ -69,44 +69,58 @@ class PostUser extends Controller
 
     public function asignar4Xuxe($userId)
 {
-    // Verificar si el usuario ya tiene xuxemons asignados
-    $userXuxemonsCount = xuxemoninv::where('idusuario', $userId)->count();
     
-    // Si el usuario ya tiene xuxemons asignados, devolver un mensaje indicando que no se puede asignar más
-    if ($userXuxemonsCount > 0) {
-        return response()->json('Este usuario ya tiene xuxemons asignados', 403);
-    }
-
-    // Obtener los datos de todos los xuxemons desde el archivo JSON
-    $xuxemonsData = file_get_contents('./../database/data/data.json');
-    $allXuxemons = json_decode($xuxemonsData, true);
-
-    // Elegir aleatoriamente 4 xuxemons para el nuevo usuario
-    $randomXuxemons = collect($allXuxemons)->random(4);
-    $tamanos = ['Pequeño', 'Mediano', 'Grande'];
-
-    // Obtener el usuario
-    $user = User::find($userId);
-
-    if (!$user) {
-        return response()->json('Usuario no encontrado');
-    }
-
-    // Crear registros en la tabla xuxemoninvs asociados al nuevo usuario
-    foreach ($randomXuxemons as $xuxemon) {
-        $xuxemoninv = new xuxemoninv();
-        $xuxemoninv->idxuxemon = $xuxemon['id'];
-        $xuxemoninv->idusuario = $userId;
-        $xuxemoninv->nombre = $xuxemon['nombre'];
-        $xuxemoninv->tipo = $xuxemon['tipo'];
-        $xuxemoninv->tamano = $tamanos[array_rand($tamanos)]; // Seleccionar aleatoriamente un tamaño
-        $xuxemoninv->imagen = $xuxemon['imagen'];
-        $xuxemoninv->estado = 'Activo';
-        $xuxemoninv->caramelos_comidos = $xuxemon['caramelos_comidos'];
-        $xuxemoninv->save();
-    }
-
-    return response()->json('Xuxemons asignados correctamente');
+        $userXuxemonsCount = xuxemoninv::where('idusuario', $userId)->count();
+        
+        // Si el usuario ya tiene xuxemons asignados, devolver un mensaje indicando que no se puede asignar más
+        if ($userXuxemonsCount > 0) {
+            return response()->json('Este usuario ya tiene xuxemons asignados', 403);
+        }
+    
+        $xuxemonsData = file_get_contents('./../database/data/data.json');
+        $allXuxemons = json_decode($xuxemonsData, true);
+    
+        // Obtener una muestra aleatoria repetida de 10 xuxemons para el nuevo usuario
+        $randomXuxemons = [];
+        $tamanos = ['Pequeño', 'Mediano', 'Grande'];
+        $totalXuxemons = count($allXuxemons);
+    
+        for ($i = 0; $i < 10; $i++) {
+            $randomIndex = rand(0, $totalXuxemons - 1);
+            $randomXuxemons[] = $allXuxemons[$randomIndex];
+        }
+    
+        $user = User::find($userId);
+    
+        if (!$user) {
+            return response()->json('Usuario no encontrado');
+        }
+    
+        $activeXuxemonCount = 0;
+    
+        foreach ($randomXuxemons as $index => $xuxemon) {
+            $xuxemoninv = new xuxemoninv();
+            $xuxemoninv->idxuxemon = $xuxemon['id'];
+            $xuxemoninv->idusuario = $userId;
+            $xuxemoninv->nombre = $xuxemon['nombre'];
+            $xuxemoninv->tipo = $xuxemon['tipo'];
+            $xuxemoninv->tamano = $tamanos[array_rand($tamanos)]; // Seleccionar aleatoriamente un tamaño
+            $xuxemoninv->imagen = $xuxemon['imagen'];
+            
+            // Asignar estado según el número de Xuxemons activos
+            if ($activeXuxemonCount < 4) {
+                $xuxemoninv->estado = 'Activo';
+                $activeXuxemonCount++;
+            } else {
+                $xuxemoninv->estado = 'Inactivo';
+            }
+            
+            $xuxemoninv->caramelos_comidos = $xuxemon['caramelos_comidos'];
+            $xuxemoninv->save();
+        }
+    
+        return response()->json('Xuxemons asignados correctamente');
+    
 }
 
 }
