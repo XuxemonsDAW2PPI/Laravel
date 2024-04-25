@@ -25,10 +25,10 @@ class PostHospital extends Controller
 
         $Inventario = inventario::where('idusuario', $idUser)->first();
 
-        if ($Inventario->tabletachoco < 1) {
+        if ($Inventario->Xocolatina < 1) {
             return response()->json(['error' => 'No tienes Xocolatinas para curar a este Xuxemon'], 404);
         } else {
-            $Inventario->tabletachoco -= 1;
+            $Inventario->Xocolatina -= 1;
             $Inventario->save();
             $xuxemoSelect->Enfermedad1 = false;
             $xuxemoSelect->save();

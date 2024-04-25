@@ -23,7 +23,8 @@ class inventario extends Model
         'carameloredondo',
         'surtido',
         'XalDeFrutas',
-        'Inxulina'
+        'Inxulina',
+        'Xocolatina'
     ];
     const UPDATED_AT = null;
     const CREATED_AT = null;
