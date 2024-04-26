@@ -32,7 +32,7 @@ class PostHospital extends Controller
             $Inventario->save();
             $xuxemoSelect->Enfermedad1 = false;
             $xuxemoSelect->save();
-            return response()->json(['success' => 'Pokemon curado de Bajón de Azucar'], 404);
+            return response()->json(['success' => 'Pokemon curado de Bajón de Azucar']);
         }
     }
 
@@ -54,7 +54,7 @@ class PostHospital extends Controller
             $Inventario->save();
             $xuxemoSelect->Enfermedad2 = false;
             $xuxemoSelect->save();
-            return response()->json(['success' => 'Pokemon curado de Sobredosis'], 404);
+            return response()->json(['success' => 'Pokemon curado de Sobredosis']);
         }
     }
 
@@ -76,7 +76,7 @@ class PostHospital extends Controller
             $Inventario->save();
             $xuxemoSelect->Enfermedad3 = false;
             $xuxemoSelect->save();
-            return response()->json(['success' => 'Pokemon curado de Atracón'], 404);
+            return response()->json(['success' => 'Pokemon curado de Atracón']);
         }
     }
 }
