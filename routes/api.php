@@ -86,5 +86,8 @@ Route::get('Inventario/{userId}/{nombre}/curarenfermedad1', [PostHospital::class
 Route::get('Inventario/{userId}/{nombre}/curarenfermedad2', [PostHospital::class, 'CurarEnf2'])->name('curarenfermedad2');
 Route::get('Inventario/{userId}/{nombre}/curarenfermedad3', [PostHospital::class, 'CurarEnf3'])->name('curarenfermedad3');
 
+//Amigos
+
+
 
 

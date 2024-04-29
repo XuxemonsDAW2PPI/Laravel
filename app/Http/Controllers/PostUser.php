@@ -27,9 +27,13 @@ class PostUser extends Controller
 
     public function store(Request $request)
     {
+        $randomNumber = rand(1000, 9999);
+
         $user = new User();
         $user->nombre = $request->input('nombre');
         $user->password = $request->input('password');
+        $userFinal = $request->input('nombre') . "#" . $randomNumber;
+        $user->tag = $userFinal;
         $user->email = $request->input('email');
         $user->userType = $request->input('usertype');
         $user->save();
