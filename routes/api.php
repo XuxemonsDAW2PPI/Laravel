@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostXuxe;
 use App\Http\Controllers\PostUser;
+use App\Http\Controllers\PostAmigos;
 use App\Http\Controllers\PostInvXuxe;
 use App\Http\Controllers\PostInventario;
 use App\Http\Controllers\AuthController;
@@ -88,6 +89,10 @@ Route::get('Inventario/{userId}/{nombre}/curarenfermedad3', [PostHospital::class
 
 //Amigos
 
-
+Route::get('Amigos/buscaramigos',[PostAmigos::class, 'buscaramigo'])->name('buscaramigo');
+Route::get('Amigos/{userId}/añadiramigo',[PostAmigos::class, 'añadiramigo'])->name('añadiramigo');
+Route::get('Amigos/{userId}/listaamigos',[PostAmigos::class, 'listaamigos'])->name('listaamigos');
+Route::get('Amigos/{userId}/aceptaramigo',[PostAmigos::class, 'aceptaramigo'])->name('aceptaramigo');
+Route::get('Amigos/{userId}/rechazaramigo',[PostAmigos::class, 'rechazaramigo'])->name('rechazaramigo');
 
 
