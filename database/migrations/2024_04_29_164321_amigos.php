@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('amigos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('idusuario1');
+            $table->string('nombre1');
             $table->unsignedBigInteger('idusuario2');
             $table->string('nombre2');
             $table->string('estado');

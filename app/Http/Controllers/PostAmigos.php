@@ -25,8 +25,10 @@ class PostAmigos extends Controller
 
 
     public function añadiramigo($idUser, Request $request){
+        $usuarioActual = User::findOrFail($idUser);
+    
         $amigo = User::where('tag', $request->input('amigo'))->first();
-
+    
         if (!$amigo) {
             return response()->json(['error' => 'Usuario no encontrado'], 404);
         }
@@ -43,13 +45,13 @@ class PostAmigos extends Controller
             return response()->json(['error' => 'Ya existe una solicitud entre estos usuarios'], 400);
         }
         
-        // Crear la solicitud de amistad
         DB::beginTransaction();
         
         try {
             $amigos = new Amigos();
             $amigos->idusuario1 = $idUser;
             $amigos->idusuario2 = $amigo->id;
+            $amigos->nombre1 = $usuarioActual->tag; 
             $amigos->nombre2 = $amigo->tag;
             $amigos->estado = "Pendiente";
             $amigos->save();
@@ -62,6 +64,7 @@ class PostAmigos extends Controller
             return response()->json(['error' => 'Hubo un error al procesar la solicitud'], 500);
         }
     }
+    
 
     public function listaSolicitudesAmistad($idUser){
         // Buscar las solicitudes de amistad pendientes para el usuario dado
@@ -94,13 +97,24 @@ class PostAmigos extends Controller
                     })
                     ->where('estado', 'Aceptado')
                     ->get();
-
+    
         if($amigos->isEmpty()) {
             return response()->json(['message' => 'No tienes amigos'], 404);
         }
-
-        return response()->json($amigos);
+    
+        $nombresAmigos = collect();
+    
+        foreach ($amigos as $amigo) {
+            if ($amigo->idusuario1 == $idUser) {
+                $nombresAmigos->push($amigo->nombre2);
+            } else {
+                $nombresAmigos->push($amigo->nombre1);
+            }
+        }
+    
+        return response()->json($nombresAmigos);
     }
+    
 
     public function aceptaramigo($idUser, Request $request){
         $amigoUsuario = User::where('tag', $request->input('solicitud'))->first();

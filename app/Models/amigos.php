@@ -11,6 +11,7 @@ class amigos extends Model
     protected $fillable = [
         'id',
         'idusuario1',
+        'nombre1',
         'idusuario2',
         'nombre2',
         'estado'
