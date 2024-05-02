@@ -12,7 +12,8 @@ class amigos extends Model
         'id',
         'idusuario1',
         'idusuario2',
-        'estado',
+        'nombre2',
+        'estado'
     ];
     const UPDATED_AT = null;
     const CREATED_AT = null;

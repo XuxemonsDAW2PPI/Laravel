@@ -9,13 +9,19 @@ use Illuminate\Support\Facades\DB;
 
 class PostAmigos extends Controller
 {
-    public function buscaramigo(){
-        $users = User::all();
+    public function buscaramigo(Request $request) {
+        $tag = $request->input('tag');
+        $users = User::where('tag', $tag)->get();
+        
+        if ($users->isEmpty()) {
+            return response()->json(['message' => 'No se encontró ningún usuario con el tag proporcionado'], 404);
+        }
+        
         $tags = $users->pluck('tag')->unique()->values();
         
         return response()->json(['tags' => $tags]);
-        
     }
+    
 
 
     public function añadiramigo($idUser, Request $request){
@@ -44,6 +50,7 @@ class PostAmigos extends Controller
             $amigos = new Amigos();
             $amigos->idusuario1 = $idUser;
             $amigos->idusuario2 = $amigo->id;
+            $amigos->nombre2 = $amigo->tag;
             $amigos->estado = "Pendiente";
             $amigos->save();
         
@@ -55,6 +62,30 @@ class PostAmigos extends Controller
             return response()->json(['error' => 'Hubo un error al procesar la solicitud'], 500);
         }
     }
+
+    public function listaSolicitudesAmistad($idUser){
+        // Buscar las solicitudes de amistad pendientes para el usuario dado
+        $solicitudes = Amigos::where('idusuario2', $idUser)
+                            ->where('estado', 'Pendiente')
+                            ->get();
+    
+        if($solicitudes->isEmpty()) {
+            return response()->json(['message' => 'No tienes solicitudes de amistad pendientes'], 404);
+        }
+    
+        $solicitudesConDetalle = [];
+        foreach ($solicitudes as $solicitud) {
+            $usuario = User::find($solicitud->idusuario1);
+            $solicitudesConDetalle[] = [
+                'id' => $solicitud->id,
+                'nombre' => $usuario->nombre,
+                'tag' => $usuario->tag,
+            ];
+        }
+    
+        return response()->json($solicitudesConDetalle);
+    }
+    
 
     public function listaamigos($idUser){
         $amigos = Amigos::where(function ($query) use ($idUser) {

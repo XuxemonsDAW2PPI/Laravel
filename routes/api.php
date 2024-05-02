@@ -94,5 +94,7 @@ Route::get('Amigos/{userId}/añadiramigo',[PostAmigos::class, 'añadiramigo'])->
 Route::get('Amigos/{userId}/listaamigos',[PostAmigos::class, 'listaamigos'])->name('listaamigos');
 Route::get('Amigos/{userId}/aceptaramigo',[PostAmigos::class, 'aceptaramigo'])->name('aceptaramigo');
 Route::get('Amigos/{userId}/rechazaramigo',[PostAmigos::class, 'rechazaramigo'])->name('rechazaramigo');
+Route::get('Amigos/{userId}/solicitudes', [PostAmigos::class, 'listaSolicitudesAmistad'])->name('listaSolicitudesAmistad');
+
 
 
