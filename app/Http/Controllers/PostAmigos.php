@@ -159,8 +159,8 @@ class PostAmigos extends Controller
             return response()->json(['error' => 'Usuario no encontrado']);
         }
         
-        $amigoSolicitud = Amigos::where('idusuario1', $idUser)
-                                 ->where('idusuario2', $amigo->id)
+        $amigoSolicitud = Amigos::where('idusuario2', $idUser)
+                                 ->where('idusuario1', $amigo->id)
                                  ->first();
         
         if(!$amigoSolicitud){
