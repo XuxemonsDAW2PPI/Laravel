@@ -9,8 +9,19 @@ use Illuminate\Support\Facades\DB;
 
 class PostAmigos extends Controller
 {
-    public function buscaramigo(Request $request) {
+    public function buscaramigo($userId, Request $request) {
         $tag = $request->input('tag');
+        
+        $user = User::find($userId);
+        
+        if (!$user) {
+            return response()->json(['error' => 'Usuario no encontrado'], 404);
+        }
+        
+        if ($user->tag === $tag) {
+            return response()->json(['message' => 'Este tag es tuyo']);
+        }
+        
         $users = User::where('tag', $tag)->get();
         
         if ($users->isEmpty()) {
@@ -21,6 +32,7 @@ class PostAmigos extends Controller
         
         return response()->json(['tags' => $tags]);
     }
+    
     
 
 

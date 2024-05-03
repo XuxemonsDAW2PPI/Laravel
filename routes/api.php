@@ -39,6 +39,7 @@ Route::get('User/show/{id}', [PostUser::class, 'show'])->name('ushow');
 Route::post('User/store', [PostUser::class, 'store'])->name('ustore');
 Route::post('User/update/{id}', [PostUser::class, 'update'])->name('uupdate');
 Route::delete('User/delete/{id}', [PostUser::class, 'destroy'])->name('udestroy');
+Route::get('User/{userId}/tag', [PostUser::class, 'obtenerTagUsuario'])->name('obtenertagusuario');
 
 //Xuxemons
 Route::get('Xuxemon/load', [PostXuxe::class, 'cargarXuxemon'])->name('xload');
@@ -89,7 +90,7 @@ Route::get('Inventario/{userId}/{nombre}/curarenfermedad3', [PostHospital::class
 
 //Amigos
 
-Route::get('Amigos/buscaramigos',[PostAmigos::class, 'buscaramigo'])->name('buscaramigo');
+Route::get('Amigos/{userId}/buscaramigos',[PostAmigos::class, 'buscaramigo'])->name('buscaramigo');
 Route::get('Amigos/{userId}/añadiramigo',[PostAmigos::class, 'añadiramigo'])->name('añadiramigo');
 Route::get('Amigos/{userId}/listaamigos',[PostAmigos::class, 'listaamigos'])->name('listaamigos');
 Route::get('Amigos/{userId}/aceptaramigo',[PostAmigos::class, 'aceptaramigo'])->name('aceptaramigo');

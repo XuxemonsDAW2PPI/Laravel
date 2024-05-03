@@ -127,4 +127,10 @@ class PostUser extends Controller
     
 }
 
+public function obtenerTagUsuario($userId)
+    {
+        $user = User::findOrFail($userId);
+        return response()->json(['tag' => $user->tag]);
+    }
+
 }
