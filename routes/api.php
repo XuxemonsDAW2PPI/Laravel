@@ -97,5 +97,7 @@ Route::get('Amigos/{userId}/aceptaramigo',[PostAmigos::class, 'aceptaramigo'])->
 Route::get('Amigos/{userId}/rechazaramigo',[PostAmigos::class, 'rechazaramigo'])->name('rechazaramigo');
 Route::get('Amigos/{userId}/solicitudes', [PostAmigos::class, 'listaSolicitudesAmistad'])->name('listaSolicitudesAmistad');
 
+//Chat
 
-
+Route::post("SendMessage", [\App\Http\Controllers\ChatController::class, "SendMessage"]);
+Route::get("load", [\App\Http\Controllers\MessagesController::class, "LoadThePreviousMessages"]);
