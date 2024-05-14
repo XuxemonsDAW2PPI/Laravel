@@ -114,18 +114,19 @@ class PostAmigos extends Controller
             return response()->json(['message' => 'No tienes amigos'], 404);
         }
     
-        $nombresAmigos = collect();
+        $amigosData = collect();
     
         foreach ($amigos as $amigo) {
-            if ($amigo->idusuario1 == $idUser) {
-                $nombresAmigos->push($amigo->nombre2);
-            } else {
-                $nombresAmigos->push($amigo->nombre1);
-            }
+            $amigoData = [
+                'id' => ($amigo->idusuario1 == $idUser) ? $amigo->idusuario2 : $amigo->idusuario1,
+                'nombre' => ($amigo->idusuario1 == $idUser) ? $amigo->nombre2 : $amigo->nombre1
+            ];
+            $amigosData->push($amigoData);
         }
     
-        return response()->json($nombresAmigos);
+        return response()->json($amigosData);
     }
+    
     
 
     public function aceptaramigo($idUser, Request $request){

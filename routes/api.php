@@ -10,6 +10,7 @@ use App\Http\Controllers\PostInventario;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Settings;
 use App\Http\Controllers\PostHospital;
+use App\Http\Controllers\PostIntercambio;
 
 /*
 |--------------------------------------------------------------------------
@@ -101,3 +102,9 @@ Route::get('Amigos/{userId}/solicitudes', [PostAmigos::class, 'listaSolicitudesA
 
 Route::post("SendMessage", [\App\Http\Controllers\ChatController::class, "SendMessage"]);
 Route::get("load", [\App\Http\Controllers\MessagesController::class, "LoadThePreviousMessages"]);
+
+//Intercambio
+Route::post('Intercambio/solicitud/{idUsuario1}/{tagUsuario1}/{nombreXuxemon1}/{tipo1}/{tamanoXuxemon1}/{caramelosComidosXuxemon1}/{idUsuario2}/{tagUsuario2}', [PostIntercambio::class, 'registrarSolicitudIntercambio'])->name('registrarsolicitudIntercambio');
+Route::get('Intercambio/listasolicitudes/{idUsuario}', [PostIntercambio::class, 'listasolicitudespendientes'])->name('lsolicitudesIntercambio');
+Route::get('Intercambio/solicitudesrecibidas/{idUsuario}', [PostIntercambio::class, 'obtenerSolicitudesRecibidas'])->name('obtenersolicitudesRecibidas');
+Route::delete('Intercambio/{idUsuario}/denegar/{idIntercambio}', [PostIntercambio::class, 'denegarintercambio'])->name('denegar_intercambio');

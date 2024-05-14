@@ -13,13 +13,17 @@ class intercambio extends Model
         'idusuario1',
         'usertag1',
         'nombre_xuxemon1',
+        'tipo1',
         'tamano_xuxemon1',
         'caramelos_comidosx1',
         'idusuario2',
         'usertag2',
         'nombre_xuxemon2',
+        'tipo2',
         'tamano_xuxemon2',
         'caramelos_comidosx2',
+        'consentimiento1',
+        'consentimiento2',
         'estado'
     ];
     const UPDATED_AT = null;
