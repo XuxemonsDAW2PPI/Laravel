@@ -28,22 +28,24 @@ class PostChat extends Controller
         return false;
     }
 
-    public function SendMessage(SendMessageRequest $request)
+    public function SendMessage($user_id, SendMessageRequest $request)
     {
-        if ($request->to == auth("sanctum")->user()->name){
+        $userid = User::where('id', $user_id)
+        ->first();
+        if ($request->to == $userid->name){
             return response()->json(['message' => "You cannot send message to yourself"]);
         }
 
         $OtherUserId = User::where("name",$request->to)->first()->id;
-        $collection = $this->IsTherePreviousChat($OtherUserId,auth("sanctum")->user()->id);
+        $collection = $this->IsTherePreviousChat($OtherUserId,$userid);
 
         if ($collection == false) {
             $chat = Chat::create([
-                'user_id' => auth("sanctum")->user()->id
+                'user_id' => $userid
             ]);
         }
             $message = Message::create([
-            'from_user' => auth("sanctum")->user()->id,
+            'from_user' => $userid,
             'to_user'   => $OtherUserId,
             'content'   => $request->message ,
             'chat_id'   => $collection == false? $chat->id:$collection[0]->chat_id,
