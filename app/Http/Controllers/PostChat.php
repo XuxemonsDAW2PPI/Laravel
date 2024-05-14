@@ -1,14 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Events.MessageSent;
-use App\Events.SendMessageEvent;
-use App\Http\Requests.SendMessageRequest;
+use App\Events\MessageSent;
+use App\Events\SendMessageEvent;
+use App\Http\Requests\SendMessageRequest;
 use App\Models\Chat;
 use App\Models\Message;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 
 class PostChat extends Controller
 {
