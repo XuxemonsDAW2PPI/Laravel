@@ -11,6 +11,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Settings;
 use App\Http\Controllers\PostHospital;
 use App\Http\Controllers\PostIntercambio;
+use App\Http\Controllers\PostChat;
 
 /*
 |--------------------------------------------------------------------------
@@ -100,8 +101,8 @@ Route::get('Amigos/{userId}/solicitudes', [PostAmigos::class, 'listaSolicitudesA
 
 //Chat
 
-Route::post("SendMessage", [\App\Http\Controllers\ChatController::class, "SendMessage"]);
-Route::get("load", [\App\Http\Controllers\MessagesController::class, "LoadThePreviousMessages"]);
+Route::post("{user_id}/SendMessage", [PostChat::class, "SendMessage"]);
+Route::get("load", [PostChat::class, "LoadThePreviousMessages"]);
 
 //Intercambio
 Route::post('Intercambio/solicitud/{idUsuario1}/{tagUsuario1}/{nombreXuxemon1}/{tipo1}/{tamanoXuxemon1}/{caramelosComidosXuxemon1}/{idUsuario2}/{tagUsuario2}', [PostIntercambio::class, 'registrarSolicitudIntercambio'])->name('registrarsolicitudIntercambio');
