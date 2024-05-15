@@ -101,7 +101,7 @@ Route::get('Amigos/{userId}/solicitudes', [PostAmigos::class, 'listaSolicitudesA
 
 //Chat
 
-Route::post("{user_id}/SendMessage", [PostChat::class, "SendMessage"]);
+Route::post("{user_id}/SendMessage", [PostChat::class, "SendMessage"])->name("SendMessage");
 Route::get("load", [PostChat::class, "LoadThePreviousMessages"]);
 
 //Intercambio
