@@ -36,24 +36,26 @@ class PostIntercambio extends Controller
 
     public function listasolicitudespendientes($idUsuario)
     {
-            $solicitudesEnviadas = Intercambio::where('idusuario1', $idUsuario)
-                ->where('estado', 'Pendiente')
-                ->select(
-                    'nombre_xuxemon1',
-                    'tipo1',
-                    'tamano_xuxemon1',
-                    'caramelos_comidosx1',
-                    'idusuario2',
-                    'usertag2',
-                    'nombre_xuxemon2',
-                    'tipo2',
-                    'tamano_xuxemon2',
-                    'caramelos_comidosx2',
-                    'consentimiento1',
-                    'consentimiento2',
-                    'estado'
-                )
-                ->get();
+        $solicitudesEnviadas = Intercambio::where('idusuario1', $idUsuario)
+        ->where('estado', 'Pendiente')
+        ->whereNull('consentimiento1')
+        ->select(
+            'id',
+            'nombre_xuxemon1',
+            'tipo1',
+            'tamano_xuxemon1',
+            'caramelos_comidosx1',
+            'idusuario2',
+            'usertag2',
+            'nombre_xuxemon2',
+            'tipo2',
+            'tamano_xuxemon2',
+            'caramelos_comidosx2',
+            'consentimiento1',
+            'consentimiento2',
+            'estado'
+        )
+        ->get();
         
             $solicitudesRecibidas = Intercambio::where('idusuario2', $idUsuario)
                 ->where('estado', 'Pendiente')
@@ -144,7 +146,7 @@ class PostIntercambio extends Controller
     $idUsuario = $request->input('idusuario');
 
     // Buscar el registro de intercambio
-    $intercambio = Intercambio::where('estado', 'Pendiente')
+    $intercambio = intercambio::where('estado', 'Pendiente')
         ->where('idusuario1', $idUsuario)
         ->whereNull('consentimiento1')
         ->first();
@@ -157,10 +159,16 @@ class PostIntercambio extends Controller
         // Buscar los Xuxemons en la tabla xuxemoninvs para el intercambio
         $xuxemonUsuario1 = xuxemoninv::where('idusuario', $intercambio->idusuario1)
             ->where('nombre', $intercambio->nombre_xuxemon1)
+            ->where('tamano', $intercambio->tamano_xuxemon1)
+            ->where('tipo', $intercambio->tipo1)
+            ->where('caramelos_comidos', $intercambio->caramelos_comidosx1)
             ->first();
 
         $xuxemonUsuario2 = xuxemoninv::where('idusuario', $intercambio->idusuario2)
             ->where('nombre', $intercambio->nombre_xuxemon2)
+            ->where('tamano', $intercambio->tamano_xuxemon2)
+            ->where('tipo', $intercambio->tipo2)
+            ->where('caramelos_comidos', $intercambio->caramelos_comidosx2)
             ->first();
 
         if ($xuxemonUsuario1 && $xuxemonUsuario2) {
@@ -171,6 +179,8 @@ class PostIntercambio extends Controller
             // Guardar los cambios
             $xuxemonUsuario1->save();
             $xuxemonUsuario2->save();
+
+            $intercambio->delete();
 
             return response()->json(['message' => 'Intercambio confirmado y Xuxemons intercambiados con éxito.'], 200);
         } else {
