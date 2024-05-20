@@ -32,6 +32,21 @@ class PostInvXuxe extends Controller
         return response()->json($xuxemoninv);
     }
 
+    public function mostrarsinEnfermedades($id)
+{
+    $xuxemoninv = xuxemoninv::where('idusuario', $id)
+        ->where('Enfermedad1', '0')
+        ->where('Enfermedad2', '0')
+        ->where('Enfermedad3', '0')
+        ->get();
+
+    if ($xuxemoninv->isEmpty()) {
+        return response()->json('Usuario no encontrado o no tiene Xuxemons sin enfermedades');
+    }
+
+    return response()->json($xuxemoninv);
+}
+
     public function desactivarXuxemon($idusuario, $id)
 {
     $xuxemoninv = xuxemoninv::where('idusuario', $idusuario)

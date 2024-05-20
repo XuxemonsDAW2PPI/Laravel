@@ -57,6 +57,7 @@ Route::post('Xuxemon/actualizar-tamano', [PostXuxe::class, 'actualizartamano'])-
 //Inventario Xuxemons
 Route::post('Xuxemon/give', [PostInvXuxe::class, 'give'])->name('xgive');
 Route::get('Xuxemon/mostrar/{id}', [PostInvXuxe::class, 'mostrar'])->name('mostrar');
+Route::get('Xuxemon/mostrarsinenf/{id}', [PostInvXuxe::class, 'mostrarsinEnfermedades'])->name('mostrarsin');
 Route::post('Xuxemon/alimentar/{idUser}/{nombre}/{nombreobjeto}', [PostInvXuxe::class, 'alimentarXuxemon'])->name('alimentarXuxemon');
 Route::post('Xuxemon/eliminar/{idusuario}/{id}', [PostInvXuxe::class, 'desactivarXuxemon'])->name('desactivarxuxemon');
 Route::post('Xuxemon/activar/{idusuario}/{id}', [PostInvXuxe::class, 'activarXuxemon'])->name('activarxuxemon');
