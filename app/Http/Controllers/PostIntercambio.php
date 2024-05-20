@@ -101,52 +101,54 @@ class PostIntercambio extends Controller
         }
     }
 
-    public function aceptarSolicitudIntercambio(Request $request, $idusuario)
-    {
-        // Validar los datos recibidos
-        $request->validate([
-            'nombre_xuxemon2' => 'required|string|max:255',
-            'tipo2' => 'required|string|max:255',
-            'tamano_xuxemon2' => 'required|string|max:255',
-            'caramelos_comidosx2' => 'required|integer'
-        ]);
+    public function aceptarSolicitudIntercambio(Request $request, $idusuario, $idIntercambio)
+{
+    // Validar los datos recibidos
+    $request->validate([
+        'nombre_xuxemon2' => 'required|string|max:255',
+        'tipo2' => 'required|string|max:255',
+        'tamano_xuxemon2' => 'required|string|max:255',
+        'caramelos_comidosx2' => 'required|integer'
+    ]);
 
-        // Buscar el registro que coincide con las condiciones especificadas
-        $intercambio = intercambio::where('idusuario2', $idusuario)
-            ->where('estado', 'Pendiente')
-            ->whereNull('nombre_xuxemon2')
-            ->whereNull('tipo2')
-            ->whereNull('tamano_xuxemon2')
-            ->whereNull('caramelos_comidosx2')
-            ->whereNull('consentimiento1')
-            ->whereNull('consentimiento2')
-            ->first();
+    // Buscar el registro que coincide con las condiciones especificadas y el id de intercambio
+    $intercambio = intercambio::where('id', $idIntercambio)
+        ->where('idusuario2', $idusuario)
+        ->where('estado', 'Pendiente')
+        ->whereNull('nombre_xuxemon2')
+        ->whereNull('tipo2')
+        ->whereNull('tamano_xuxemon2')
+        ->whereNull('caramelos_comidosx2')
+        ->whereNull('consentimiento1')
+        ->whereNull('consentimiento2')
+        ->first();
 
-        // Verificar si se encontró un registro que cumpla con las condiciones
-        if (!$intercambio) {
-            return response()->json(['error' => 'No se encontró un intercambio que cumpla con las condiciones especificadas.'], 404);
-        }
-
-        // Actualizar el registro con los datos proporcionados
-        $intercambio->update([
-            'nombre_xuxemon2' => $request->nombre_xuxemon2,
-            'tipo2' => $request->tipo2,
-            'tamano_xuxemon2' => $request->tamano_xuxemon2,
-            'caramelos_comidosx2' => $request->caramelos_comidosx2,
-            'consentimiento2' => 'Confirmado'
-        ]);
-
-        // Devolver una respuesta de éxito
-        return response()->json(['message' => 'Solicitud de intercambio aceptada con éxito.'], 200);
+    // Verificar si se encontró un registro que cumpla con las condiciones
+    if (!$intercambio) {
+        return response()->json(['error' => 'No se encontró un intercambio que cumpla con las condiciones especificadas.'], 404);
     }
 
+    // Actualizar el registro con los datos proporcionados
+    $intercambio->update([
+        'nombre_xuxemon2' => $request->nombre_xuxemon2,
+        'tipo2' => $request->tipo2,
+        'tamano_xuxemon2' => $request->tamano_xuxemon2,
+        'caramelos_comidosx2' => $request->caramelos_comidosx2,
+        'consentimiento2' => 'Confirmado'
+    ]);
 
-    public function confirmarIntercambio1(Request $request)
+    // Devolver una respuesta de éxito
+    return response()->json(['message' => 'Solicitud de intercambio aceptada con éxito.'], 200);
+}
+
+
+    public function confirmarIntercambio1(Request $request, $idIntercambio)
 {
     $idUsuario = $request->input('idusuario');
 
     // Buscar el registro de intercambio
-    $intercambio = intercambio::where('estado', 'Pendiente')
+    $intercambio = intercambio::where('id', $idIntercambio)
+        ->where('estado', 'Pendiente')
         ->where('idusuario1', $idUsuario)
         ->whereNull('consentimiento1')
         ->first();

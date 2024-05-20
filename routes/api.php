@@ -110,5 +110,5 @@ Route::post('Intercambio/solicitud/{idUsuario1}/{tagUsuario1}/{nombreXuxemon1}/{
 Route::get('Intercambio/listasolicitudes/{idUsuario}', [PostIntercambio::class, 'listasolicitudespendientes'])->name('lsolicitudesIntercambio');
 Route::get('Intercambio/solicitudesrecibidas/{idUsuario}', [PostIntercambio::class, 'obtenerSolicitudesRecibidas'])->name('obtenersolicitudesRecibidas');
 Route::delete('Intercambio/{idUsuario}/denegar/{idIntercambio}', [PostIntercambio::class, 'denegarintercambio'])->name('denegar_intercambio');
-Route::post('Intercambio/aceptar/{idusuario}', [PostIntercambio::class, 'aceptarSolicitudIntercambio'])->name('aceptarsolicitud');
-Route::post('Intercambio/aceptarfinal', [PostIntercambio::class, 'confirmarIntercambio1'])->name('aceptarintercambio1');
+Route::post('Intercambio/aceptar/{idusuario}/{idIntercambio}', [PostIntercambio::class, 'aceptarSolicitudIntercambio'])->name('aceptarsolicitud');
+Route::post('Intercambio/{idIntercambio}/aceptarfinal', [PostIntercambio::class, 'confirmarIntercambio1'])->name('aceptarintercambio1');
